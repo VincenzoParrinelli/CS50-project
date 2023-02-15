@@ -11,20 +11,6 @@
         overflow: auto;
         padding: 1.6rem;
 
-        &::-webkit-scrollbar {
-            width: 6px;
-            background-color: #F5F5F5;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background-color: rgba(128, 128, 128, 0.518);
-        }
-
-        &::-webkit-scrollbar-track {
-            border-radius: 10px;
-            background-color: rgba(128, 128, 128, 0.3);
-        }
-
+        @include scrollbar;
     }
 }

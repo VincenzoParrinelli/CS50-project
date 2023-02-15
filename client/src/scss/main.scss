@@ -1,11 +1,12 @@
-//VARIABLES
+//ABSTRACTS
 @import "abstracts/variables";
+@import "abstracts/mixins";
 
 //BASE
 @import "base/base";
 @import "base/typography";
 
-// COMPONENTS
+//COMPONENTS
 @import "components/header";
 @import "components/button";
 @import "components/filesDragger";
