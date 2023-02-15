@@ -1,9 +1,11 @@
-@import "variables";
+//VARIABLES
+@import "abstracts/variables";
 
-@import "base";
+//BASE
+@import "base/base";
+@import "base/typography";
 
-@import "header";
-
-@import "typography";
-
-@import "button";
+// COMPONENTS
+@import "components/header";
+@import "components/button";
+@import "components/filesDragger";

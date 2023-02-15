@@ -1,0 +1,37 @@
+.files-dragger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: rozanovaRegular;
+    font-size: 2.2rem;
+    
+    &__container {
+        padding: 2.5rem 12rem;
+        border: dashed 2px $color-secondary;
+        border-radius: 1.6rem;
+    }
+
+    &__drag-and-drop {
+
+    }
+
+    &__paragraph {
+        color: $color-primary;
+    }
+
+    &__paragraph-2 {
+        color: $color-secondary;
+        font-size: 1.8rem;
+        margin: 1rem;
+    }
+
+    &__upload-icon {
+        height: 8rem;
+        width: 8rem;
+        display: block;
+        margin: auto;
+        margin-bottom: 2rem;
+        fill: $color-primary;
+    }
+}
