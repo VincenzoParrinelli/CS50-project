@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+
+    &__code-container {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+    }
+
+    &__code {
+        background-color: $color-grey-light;
+        font-size: 1.8rem;
+        padding: 1rem;
+        text-align: center;
+        flex: 0 0 10%;
+    }
+}
