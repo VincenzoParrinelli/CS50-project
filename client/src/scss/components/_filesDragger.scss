@@ -42,4 +42,17 @@
         margin: .5rem;
     }
 
+    &__input {
+        display: none;
+    }
+
+    &__label-for-input {
+        @include buttonAndLabelBasicStyles;
+
+        font-size: 1.4rem;
+        padding: .4rem 2rem;
+        margin-bottom: 1.2rem;
+        
+    }
+
 }
