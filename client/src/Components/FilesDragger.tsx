@@ -1,9 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useRef} from 'react'
 import { ReactComponent as UploadFileIcon } from "../assets/Images/upload-file.svg"
 
 export default function FilesDragger() {
 
+
   const draggableAreaRef = useRef(null) as React.MutableRefObject<HTMLDivElement | null>
+
+
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
@@ -20,6 +23,7 @@ export default function FilesDragger() {
   const handleOnDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
 
+    draggableAreaRef.current!.classList.remove("files-dragger__drag-and-drop--on-drag")
   }
 
   return (
