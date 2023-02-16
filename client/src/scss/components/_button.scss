@@ -7,7 +7,6 @@
     color: $color-white;
     cursor: pointer;
     transition: transform .2s, background-color .05s;
-    margin: 2.5rem;
     
     &:hover, 
     &:active {
@@ -20,9 +19,14 @@
         transform: translateY(-1px);
     }
 
+    &--primary {
+        margin-top: 2rem;
+    }
+
     &--secondary {
         padding: 1rem 2rem;
         border-radius: 12px;
+        margin-bottom: 1.2rem;
     }
 
 }

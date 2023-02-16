@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 4rem;
+    padding-bottom: 4rem;
 
     &__code-container {
         display: flex;
@@ -13,7 +13,7 @@
 
     &__code {
         background-color: $color-grey-light;
-        font-size: 1.6rem;
+        font-size: 1.1rem;
         padding: 1rem;
         text-align: center;
         flex: 0 0 10%;

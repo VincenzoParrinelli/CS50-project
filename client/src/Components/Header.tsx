@@ -10,7 +10,7 @@ export default function Header() {
                 <span className="header__code">CODEASASASASAASASASASASASASASAA</span>
             </div>
 
-            <button className="btn">NEW CODE</button>
+            <button className="btn btn--primary">NEW CODE</button>
         </div>
     )
 }
