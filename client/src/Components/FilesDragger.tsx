@@ -1,13 +1,13 @@
 import React, { useRef, useContext, ChangeEvent } from 'react'
 import { ReactComponent as UploadFileIcon } from "../assets/Images/upload-file.svg"
 import FilesContext from '../context/FilesContext'
+import { FilesInterface } from '../ts/interfaces/filesInterface'
 
 export default function FilesDragger() {
 
   const draggableAreaRef = useRef(null) as React.MutableRefObject<HTMLDivElement | null>
 
-  //TODO CHANGE TYPE**************
-  const { files, setFiles }: any = useContext(FilesContext)
+  const { files, setFiles }: FilesInterface = useContext(FilesContext)
 
   // When user hoveres on drag and drop area change style
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
