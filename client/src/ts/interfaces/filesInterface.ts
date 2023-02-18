@@ -1,5 +1,8 @@
+// Types for files
+export type FilesType = FileList | File[]
+
 // Interface for filesContext
 export interface FilesInterface {
-    files: FileList,
-    setFiles: React.Dispatch<React.SetStateAction<FileList>>
+    files: FilesType,
+    setFiles: React.Dispatch<React.SetStateAction<FilesType>>
 }
