@@ -1,14 +1,14 @@
 import React, { useRef, useContext, ChangeEvent } from 'react'
 import { ReactComponent as UploadFileIcon } from "../assets/Images/upload-file.svg"
 import FilesContext from '../context/FilesContext'
-import { FilesInterface } from '../ts/interfaces/filesInterface'
+import { FilesInterface, FilesMetadataArray, FilesType } from '../ts/interfaces/filesInterfaces'
 import localforage from 'localforage'
 
 export default function FilesDragger() {
 
   const draggableAreaRef = useRef(null) as React.MutableRefObject<HTMLDivElement | null>
 
-  const { files, setFiles }: FilesInterface = useContext(FilesContext)
+  const { files, setFiles, storageFilesMetadata }: FilesInterface = useContext(FilesContext)
 
   // When user hoveres on drag and drop area change style
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -24,20 +24,13 @@ export default function FilesDragger() {
     draggableAreaRef.current!.classList.remove("files-dragger__drag-and-drop--on-drag")
   }
 
-  // Handle drag and dropped files 
-  const handleOnDrop = async (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
+  // Set files metadata in localforage
+  const setFilesMetadata = async (newFiles: FileList) => {
 
-    const newFilesArr = e.dataTransfer.files
-
-    setFiles(prevFiles => [...prevFiles, ...newFilesArr])
-
-    console.log(files)
-
-    const newMetadataList = []
-
+    const newMetadataList = [] as FilesMetadataArray[]
+    
     // Iterate through files, get their metadata one by one and push into newMetadataList
-    for (const file of newFilesArr) {
+    for (const file of newFiles) {
 
       const metadata = {
         name: file.name,
@@ -49,10 +42,21 @@ export default function FilesDragger() {
       newMetadataList.push(metadata)
     }
 
-    // Set localForage with metadataList
-    const storageFilesMetadata = await localforage.getItem("files") as FileList
+    // Add new metadata in localforage without overwriting previous state
+
+    setFiles(prevFiles => [...prevFiles, ...newFiles])
 
     await localforage.setItem("files", storageFilesMetadata ? [...storageFilesMetadata, ...newMetadataList] : newMetadataList)
+
+  }
+
+  // Handle drag and dropped files 
+  const handleOnDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+
+    const newFilesArr = e.dataTransfer.files
+
+    setFilesMetadata(newFilesArr)
 
     draggableAreaRef.current!.classList.remove("files-dragger__drag-and-drop--on-drag")
   }
@@ -61,11 +65,7 @@ export default function FilesDragger() {
 
     const newFiles = e.target.files as FileList
 
-    setFiles(prevFiles => [...prevFiles, ...newFiles])
-    
-    //********CHANGE ...FILES WITH A METADATA STATE ARRAY */
-    await localforage.setItem("files", files.length ? [...files, ...newFiles] : [...newFiles])
-
+    setFilesMetadata(newFiles)
   }
 
   return (
