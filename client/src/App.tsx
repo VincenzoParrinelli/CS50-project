@@ -1,9 +1,12 @@
 import Header from './Components/Header'
 import FilesDragger from './Components/FilesDragger'
 import FilesList from './Components/FilesList'
-import { FilesContextProvider } from './context/FilesContext'
+import FilesContext, { FilesContextProvider } from './context/FilesContext'
+import { useContext } from 'react'
 
 function App() {
+
+  const { storageFilesMetadata } = useContext(FilesContext)
 
   return (
     <div className="App">

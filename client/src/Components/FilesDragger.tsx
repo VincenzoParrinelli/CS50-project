@@ -8,7 +8,7 @@ export default function FilesDragger() {
 
   const draggableAreaRef = useRef(null) as React.MutableRefObject<HTMLDivElement | null>
 
-  const { files, setFiles, storageFilesMetadata }: FilesInterface = useContext(FilesContext)
+  const { setFiles, storageFilesMetadata }: FilesInterface = useContext(FilesContext)
 
   // When user hoveres on drag and drop area change style
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -27,7 +27,7 @@ export default function FilesDragger() {
   // Set files metadata in localforage
   const setFilesMetadata = async (newFiles: FileList) => {
 
-    const newMetadataList = [] as FilesMetadataArray[]
+    const newMetadataList = [] as FilesMetadataArray
     
     // Iterate through files, get their metadata one by one and push into newMetadataList
     for (const file of newFiles) {
@@ -42,13 +42,13 @@ export default function FilesDragger() {
       newMetadataList.push(metadata)
     }
 
+    setFiles(prevFiles => [...prevFiles, ...newFiles]) 
+    
     // Add new metadata in localforage without overwriting previous state
-
-    setFiles(prevFiles => [...prevFiles, ...newFiles])
-
     await localforage.setItem("files", storageFilesMetadata ? [...storageFilesMetadata, ...newMetadataList] : newMetadataList)
 
   }
+
 
   // Handle drag and dropped files 
   const handleOnDrop = async (e: React.DragEvent<HTMLDivElement>) => {
