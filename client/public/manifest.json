@@ -5,7 +5,7 @@
     "version": "1.0",
 
     "background": {
-      "service_worker": "background.ts"
+      "service_worker": "background.js"
     },
     "permissions": [
       "storage"

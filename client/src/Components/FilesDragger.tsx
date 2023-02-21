@@ -1,4 +1,4 @@
-import React, { useRef, useContext, ChangeEvent } from 'react'
+import React, { useRef, useContext, ChangeEvent, useEffect } from 'react'
 import { ReactComponent as UploadFileIcon } from "../assets/Images/upload-file.svg"
 import FilesContext from '../context/FilesContext'
 import { FilesInterface, FilesMetadataArray } from '../ts/interfaces/filesInterfaces'
@@ -28,7 +28,7 @@ export default function FilesDragger() {
   const setFilesMetadata = async (newFiles: FileList) => {
 
     const newMetadataList = [] as FilesMetadataArray
-    
+
     // Iterate through files, get their metadata one by one and push into newMetadataList
     for (const file of newFiles) {
 
@@ -42,10 +42,10 @@ export default function FilesDragger() {
       newMetadataList.push(metadata)
     }
 
-    setFiles(prevFiles => [...prevFiles, ...newFiles]) 
-    
+    setFiles(prevFiles => [...prevFiles, ...newFiles])
+
     // Add new metadata in localforage without overwriting previous state
-    await localforage.setItem("files", storageFilesMetadata ? [...storageFilesMetadata, ...newMetadataList] : newMetadataList)
+    // await localforage.setItem("files", storageFilesMetadata ? [...storageFilesMetadata, ...newMetadataList] : newMetadataList)
 
   }
 
@@ -64,6 +64,8 @@ export default function FilesDragger() {
   const handleNewFiles = async (e: ChangeEvent<HTMLInputElement>) => {
 
     const newFiles = e.target.files as FileList
+
+    await chrome.runtime.sendMessage("HEWUHEWIs")
 
     setFilesMetadata(newFiles)
   }
