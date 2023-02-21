@@ -9,13 +9,12 @@ export default function FilesList() {
   return (
     <div className='files-list'>
       <div className="files-list__container">
-        
         {storageFilesMetadata?.map(file => {
            return (
             <span>{file.name}</span>
            )
         })}
-
+        
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import React, { useRef, useContext, ChangeEvent } from 'react'
 import { ReactComponent as UploadFileIcon } from "../assets/Images/upload-file.svg"
 import FilesContext from '../context/FilesContext'
-import { FilesInterface, FilesMetadataArray, FilesType } from '../ts/interfaces/filesInterfaces'
+import { FilesInterface, FilesMetadataArray } from '../ts/interfaces/filesInterfaces'
 import localforage from 'localforage'
 
 export default function FilesDragger() {

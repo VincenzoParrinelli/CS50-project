@@ -13,5 +13,4 @@ export interface FilesInterface {
     files: FilesType,
     setFiles: React.Dispatch<React.SetStateAction<FilesType>>,
     storageFilesMetadata: FilesMetadataArray,
-
 }
