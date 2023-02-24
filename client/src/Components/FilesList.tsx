@@ -4,17 +4,17 @@ import { FilesInterface } from '../ts/interfaces/filesInterfaces'
 
 export default function FilesList() {
 
-  const { files, setFiles, storageFilesMetadata }: FilesInterface = useContext(FilesContext)
+  const { files, setFiles }: FilesInterface = useContext(FilesContext)
 
   return (
     <div className='files-list'>
       <div className="files-list__container">
-        {/* {storageFilesMetadata?.map(file => {
-           return (
+        {files?.map(file => {
+          return (
             <span>{file.name}</span>
-           )
-        })} */}
-        
+          )
+        })}
+
       </div>
     </div>
   )

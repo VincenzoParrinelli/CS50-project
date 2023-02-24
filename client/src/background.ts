@@ -1,15 +1,10 @@
-chrome.runtime.onInstalled.addListener(() => {
-    console.log('Extension installed.')
-})
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log(request)
-    console.log(sender)
-    console.log("first")
 
-    sendResponse("ewe")
 
+    // Must return true or it wouldn't work
     return true
 })
 
-export { }
+export default chrome

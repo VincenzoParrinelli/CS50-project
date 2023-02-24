@@ -10,7 +10,6 @@ export type FilesMetadataArray = {
 
 // Interface for filesContext
 export interface FilesInterface {
-    files: FilesType,
-    setFiles: React.Dispatch<React.SetStateAction<FilesType>>,
-    storageFilesMetadata: FilesMetadataArray,
+    files: File[],
+    setFiles: React.Dispatch<React.SetStateAction<File[]>>,
 }

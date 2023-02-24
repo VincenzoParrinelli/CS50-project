@@ -6,8 +6,6 @@ import { useContext } from 'react'
 
 function App() {
 
-  const { storageFilesMetadata } = useContext(FilesContext)
-
   return (
     <div className="App">
       <Header />

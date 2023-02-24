@@ -1,4 +1,4 @@
-import React, { useRef, useContext, ChangeEvent, useEffect } from 'react'
+import React, { useState, useRef, useContext, ChangeEvent, useEffect } from 'react'
 import { ReactComponent as UploadFileIcon } from "../assets/Images/upload-file.svg"
 import FilesContext from '../context/FilesContext'
 import { FilesInterface, FilesMetadataArray } from '../ts/interfaces/filesInterfaces'
@@ -6,9 +6,11 @@ import localforage from 'localforage'
 
 export default function FilesDragger() {
 
+  const [test, setTest] = useState()
+
   const draggableAreaRef = useRef(null) as React.MutableRefObject<HTMLDivElement | null>
 
-  const { setFiles, storageFilesMetadata }: FilesInterface = useContext(FilesContext)
+  const { files, setFiles }: FilesInterface = useContext(FilesContext)
 
   // When user hoveres on drag and drop area change style
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -44,8 +46,8 @@ export default function FilesDragger() {
 
     setFiles(prevFiles => [...prevFiles, ...newFiles])
 
-    // Add new metadata in localforage without overwriting previous state
-    // await localforage.setItem("files", storageFilesMetadata ? [...storageFilesMetadata, ...newMetadataList] : newMetadataList)
+    // Add new files in localforage without overwriting the previous one
+    //await localforage.setItem("files", storageFilesMetadata ? [...storageFilesMetadata, ...newMetadataList] : newMetadataList)
 
   }
 
@@ -56,19 +58,39 @@ export default function FilesDragger() {
 
     const newFilesArr = e.dataTransfer.files
 
-    setFilesMetadata(newFilesArr)
+    //setFilesMetadata(newFilesArr)
 
     draggableAreaRef.current!.classList.remove("files-dragger__drag-and-drop--on-drag")
   }
 
   const handleNewFiles = async (e: ChangeEvent<HTMLInputElement>) => {
 
-    const newFiles = e.target.files as FileList
+    const newFiles = e.target.files as unknown as File[]
 
-    await chrome.runtime.sendMessage("HEWUHEWIs")
+    // Convert data to blob 1 by 1
+    for (let i = 0; i < newFiles!.length; i++) {
+      const reader = new FileReader()
 
-    setFilesMetadata(newFiles)
+      reader.onload = async (event) => {
+
+        const data = event.target!.result
+
+        await chrome.storage.local.set({ file: data })
+
+      }
+
+      reader.readAsText(newFiles![i])
+    }
+
+
+    chrome.storage.local.get("file", ({ file }) => {
+     
+      setTest(file)
+    })
+
+    setFiles(prevFiles => [...prevFiles, ...newFiles])
   }
+
 
   return (
     <div className='files-dragger'>
@@ -97,6 +119,8 @@ export default function FilesDragger() {
       />
 
       <label htmlFor='file-selector' className="files-dragger__label-for-input">Browse</label>
+
+      {test && <p style={{width: "1rem", height: "1rem"}}>{test}</p>}
 
     </div>
   )
